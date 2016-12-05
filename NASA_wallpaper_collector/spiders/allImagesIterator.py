@@ -16,7 +16,7 @@ class AllImageIterator(scrapy.Spider):
 
             yield scrapy.Request(response.urljoin(imageHref), callback=self.parse_image)
 
-        next_page = response.css('div.prev-next a').xpath('@href').extract_first()
+        next_page = response.css('div.prev-next a').xpath('@href').extract()[-1]
         if next_page is not None:
             next_page = response.urljoin(next_page)
             yield scrapy.Request(next_page, callback=self.parse)
@@ -24,6 +24,7 @@ class AllImageIterator(scrapy.Spider):
 
     def parse_image(self, response):
         jpgURL = response.css('div.archive_download span.archive_dl_text a').xpath('@href').extract()[-1]
+        jpgName = response.css('h1::text').extract()[0]
 
         item = NASAImg()
         item['image_urls'] = [jpgURL]

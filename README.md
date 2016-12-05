@@ -10,7 +10,7 @@ by default, downloaded images will be stored in
 
     NASA_wallpaper_collector/spiders/NASAWallPaper/full
 
-You may want to delete those small images manually:
+You may want to delete those small images manually: (but exploring all the picture is also fun!)
 
     ~ find full/ -name "*.jpg" -size -256k -delete
 
